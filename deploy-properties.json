@@ -14,11 +14,11 @@
          "type": "cordova",
          "outputDir": "C:\\Users\\xxx\\Dropbox\\Documents\\Dev",
          "size": 300,
-         "port": 89
+         "port": 2525
       },
       {
          "name": "Dsm-landing",
-         "port": 96
+         "port": 9696
       }
    ]
 }

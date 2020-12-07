@@ -21,7 +21,7 @@ if (-not (Test-Path -Path $package)) {
 	Copy-Item -Path package.json -Destination $web
 	& ".\replace.ps1" -file $package -searched "{{name}}" -value $name
 }
-if (-not (Test-Path -Path "node_modules")) {
+if (-not (Test-Path -Path ($web + "\node_modules"))) {
 	cd $web
 	yarn
 	cd $dir
