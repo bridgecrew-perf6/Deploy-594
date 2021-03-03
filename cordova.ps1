@@ -8,7 +8,7 @@ echo "size: $size"
 
 # Set Java to 1.8
 Set-Variable -Name JAVA_HOME -Value $java
-Set-Item -path env:path -force -value ($JAVA_HOME + $env:path)
+Set-Item -path env:path -force -value ($JAVA_HOME + ";" + $env:path)
 java -version
 
 if((Get-Command java | Select-Object -ExpandProperty Version).Major -ne 8) {
