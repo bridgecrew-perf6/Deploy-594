@@ -20,6 +20,12 @@
          "name": "Dsm-landing",
          "type": "site",
          "port": 9696
+      },
+      {
+         "name": "NgWeatherWatcher",
+         "type": "cordova",
+         "outputDir": "C:\\Users\\xxx\\Dropbox\\Documents\\Dev",
+         "size": 300
       }
    ]
 }
