@@ -1,17 +1,19 @@
 # Deploy
-Builds and deploys Angular/Node.js apps into APK file and to remote server.
+Builds and deploys Angular/Node.js apps into APK file or to remote server.
 
 ## Params
-|Param          |Description                                            |Required    |Type  |
-|:--------------|:------------------------------------------------------|:----------:|:----:|
-|java_path      |Java 8 path to used to build APK file                  |Only for APK|Path  |
-|web_dir        |Target folder of the remote server                     |Yes         |Path  |
-|apps           |Array of apps                                          |            |[]    |
-|app.name       |Name of the folder app                                 |Yes         |String|
-|app.type       |*cordova* to generate an APK file                      |Only for APK|String|
-|app.output_dir |Target folder where the generated APK will be deposited|Only for APK|Path  |
-|app.size       |Minimum size in *KB* of the APK file                   |Only for APK|Number|
-|app.port       |Application port on the server                         |Yes         |Number|
+|Param          |Description                                            |Required          |Type  |
+|:--------------|:------------------------------------------------------|:----------------:|:----:|
+|java_path      |Java 8 path to used to build APK file                  |Only for *cordova*|Path  |
+|web_dir        |Target folder of the remote server                     |Only for *site*   |Path  |
+|apps           |Array of apps                                          |                  |[]    |
+|app.name       |Name of the folder app                                 |Yes               |String|
+|app.type       |*cordova* generates an APK file only                   |Yes               |String|
+|               |*site* deploys to remote server only                   |                  |      |
+|               |*both* combines APK file and remote server             |                  |      |
+|app.output_dir |Target folder where the generated APK will be deposited|Only for *cordova*|Path  |
+|app.size       |Minimum size in *KB* of the APK file                   |Only for *cordova*|Number|
+|app.port       |Application port on the server                         |Only for *site*   |Number|
 
 ## Steps
 1. *Cordova* steps:
