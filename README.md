@@ -11,7 +11,7 @@ Builds and deploys Angular/Node.js apps into APK file or to remote server.
 |app.type       |*cordova* generates an APK file only                   |Yes               |String|
 |               |*site* deploys to remote server only                   |                  |      |
 |               |*both* combines APK file and remote server             |                  |      |
-|app.output_dir |Target folder where the generated APK will be deposited|Only for *cordova*|Path  |
+|app.outputDir |Target folder where the generated APK will be deposited|Only for *cordova*|Path  |
 |app.size       |Minimum size in *KB* of the APK file                   |Only for *cordova*|Number|
 |app.port       |Application port on the server                         |Only for *site*   |Number|
 
@@ -20,7 +20,7 @@ Builds and deploys Angular/Node.js apps into APK file or to remote server.
     1. `yarn cordova` to build the app with a specific *base-href*
     1. `cordova build android` generating the APK file
     1. Renames the file by `app.name_YYYY.MM.dd'T'HH.mm.ss.apk`
-    1. Moves it to the specify `app.output_dir`
+    1. Moves it to the specify `app.outputDir`
     1. Tests if its size is greater than `app.size`
 2. Remote server steps:
     1. `yarn build` to build the app in production mode

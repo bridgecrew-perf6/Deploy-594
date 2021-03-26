@@ -15,12 +15,12 @@ echo "Deploying $app"
 $dir = Get-Location
 Set-Variable -Name "workspace" -Value ((Split-Path ($dir | Select-Object -ExpandProperty Path) -Parent) + "\" + $app.name)
 if ($app.type -like "*cordova*" -or $app.type -like "*both*") {
-	if (-not (Test-Path -Path $app.output_dir)) {
-		Write-Host "Output Directory"$app.output_dir"doesn't exist" -ForegroundColor Red
+	if (-not (Test-Path -Path $app.outputDir)) {
+		Write-Host "Output Directory"$app.outputDir"doesn't exist" -ForegroundColor Red
 		exit
 	}
 	Write-Host "Generating apk file" -ForegroundColor Cyan
-	& ".\cordova.ps1" -name $app.name -output_dir $app.output_dir -workspace $workspace -java $properties.java_path -size $app.size
+	& ".\cordova.ps1" -name $app.name -outputDir $app.outputDir -workspace $workspace -java $properties.java_path -size $app.size
 	& ".\replace.ps1" -file ($workspace + "\dist\index.html") -searched "file:///android_asset/www/" -value '/'
 } elseif ($app.type -like "*site*") {
 	Write-Host "Build angular app" -ForegroundColor Cyan
