@@ -21,8 +21,8 @@ RUN apk -U upgrade && \
 RUN git clone -n https://github.com/${GITHUB_DIR}/${GITHUB_PROJECT}.git && \
     cd ${GITHUB_PROJECT} && \
     git checkout ${GITHUB_HASH} && \
-    npm ci --only=production && \
-    npm run build --extract-licenses=false
+    npm ci && \
+    ng build --configuration production --progress false --extract-licenses=false
 
 FROM pmb69/ng-nginx:${NG_NGINX_VERSION}
 
