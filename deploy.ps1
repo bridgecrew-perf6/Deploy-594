@@ -25,7 +25,7 @@ if ($app.type -like "*cordova*" -or $app.type -like "*both*") {
 } elseif ($app.type -like "*site*") {
 	Write-Host "Build angular app" -ForegroundColor Cyan
 	cd $workspace
-	yarn build
+	npm run build
 	cd $dir
 	& ".\replace.ps1" -file ($workspace + "\dist\index.html") -searched "{{timestamp}}" -value (Get-Date -UFormat '%d/%m/%Y %Hh%M')
 	Write-Host "Finish building" -ForegroundColor Green

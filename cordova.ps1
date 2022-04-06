@@ -24,7 +24,7 @@ cd $workspace
 
 # Build the app
 Write-Host "Build angular app" -ForegroundColor Cyan
-yarn cordova
+npm run cordova
 
 # Insert timestamp
 cd $dir

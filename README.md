@@ -17,17 +17,17 @@ Builds and deploys Angular/Node.js apps into APK file or to remote server.
 
 ## Steps
 1. *Cordova* steps:
-    1. `yarn cordova` to build the app with a specific *base-href*
+    1. `npm run cordova` to build the app with a specific *base-href*
     1. `cordova build android` generating the APK file
     1. Renames the file by `app.name_YYYY.MM.dd'T'HH.mm.ss.apk`
     1. Moves it to the specify `app.outputDir`
     1. Tests if its size is greater than `app.size`
 2. Remote server steps:
-    1. `yarn build` to build the app in production mode
+    1. `npm run build` to build the app in production mode
     1. Inserts the build timestamp in `index.html`, replacing the `{{timestamp}}` placeholder
     1. Copies the *dist* generated folder to the *web_dir*
     1. Moves the *package.json* and *server.js* files if not exists and replacing app name and port with the ones specifies. *Forever* will be used to run the application
-    1. `yarn` if no *node_modules* folder found
+    1. `npm i` if no *node_modules* folder found
 
 # Docker 
 

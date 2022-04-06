@@ -23,7 +23,7 @@ if (-not (Test-Path -Path $package)) {
 }
 if (-not (Test-Path -Path ($web + "\node_modules"))) {
 	cd $web
-	yarn
+	npm i
 	cd $dir
 }
 
