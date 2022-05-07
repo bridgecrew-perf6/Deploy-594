@@ -5,9 +5,9 @@ dockerfile=$(curl -s $url)
 
 # Mapping latest Angular version by Major version
 declare -A NgMap
-NgMap[10]=10.2.5
-NgMap[11]=11.2.14
-NgMap[12]=12.2.16
+NgMap[10]=10.2.4
+NgMap[11]=11.2.19
+NgMap[12]=12.2.17
 NgMap[13]=13.3.5
 
 # Mapping Docker Node alpine image by Angular version
