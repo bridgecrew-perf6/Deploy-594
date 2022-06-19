@@ -35,8 +35,10 @@ while [ -z $choice ]
 do
 	read -p "[y/n] #? " choice
 	if [[ $choice =~ ^(y|Y)([eE][sS])?$ ]]
-	then $($cmd)
+	then 
+    echo $($cmd)
 	elif [ ! -z $choice ]
-	then echo "Do nothing"
+	then 
+    echo "Do nothing"
 	fi
 done
