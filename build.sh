@@ -75,7 +75,7 @@ do
     fi
 
     package=$(getPackage $directory $project $branch)
-    echo $package
+    echo "Angular version detected: $package"
     
     angular=${NgMap[$package]} 
     node=${NodeMap[$package]} 
@@ -84,6 +84,10 @@ do
     nginx_version=$(getArgVersion "ng_nginx")
     read -p "Enter the pmb69/Ng-Nginx version [$nginx_version]: " nginx
     nginx=${nginx:-$nginx_version}
+
+    let cache;
+    read -p "Use cache [y]: " cache
+    cache=${cache:-y}
     
     break;
   else
@@ -92,6 +96,11 @@ do
 done
 
 cmd="docker build --build-arg GITHUB_DIR=$directory --build-arg GITHUB_PROJECT=$project --build-arg GITHUB_HASH=$branch --build-arg NODE_VERSION=$node --build-arg ANGULAR_VERSION=$angular --build-arg NG_NGINX_VERSION=$nginx --build-arg BUILD_DATE="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" -t ${project,,}-$branch $url"
+
+if [[ $cache == 'n' ]]
+then
+  cmd+=" --no-cache"
+fi
 
 echo -e "Do you want to run the following command:\n$(echo $cmd | sed 's/--/\n  --/g' | sed 's/https/\n  https/g')"
 let choice
