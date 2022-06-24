@@ -1,31 +1,31 @@
 {
-   "java_path": "C:\\Program Files\\Java\\jdk1.8.0_231\\bin;",
-   "web_dir": "\\\\myNas\\web",
-   "apps": [
-      {
-         "name": "AllMovies",
-         "type": "both",
-         "outputDir": "C:\\Users\\xxx\\Dropbox\\Documents\\Dev",
-         "size": 2400,
-         "port": 7575
-      },
-      {
-         "name": "NgMusic",
-         "type": "both",
-         "outputDir": "C:\\Users\\xxx\\Dropbox\\Documents\\Dev",
-         "size": 300,
-         "port": 2525
-      },
-      {
-         "name": "Dsm-landing",
-         "type": "site",
-         "port": 9696
-      },
-      {
-         "name": "NgWeatherWatcher",
-         "type": "cordova",
-         "outputDir": "C:\\Users\\xxx\\Dropbox\\Documents\\Dev",
-         "size": 300
-      }
-   ]
+  "java_path": "C:\\Program Files\\Java\\jdk1.8.0_231\\bin;",
+  "web_dir": "\\\\myNas\\web",
+  "apps": [
+    {
+      "name": "AllMovies",
+      "type": "both",
+      "outputDir": "C:\\Users\\xxx\\Dropbox\\Documents\\Dev",
+      "size": 2400,
+      "port": 4242
+    },
+    {
+      "name": "NgMusic",
+      "type": "both",
+      "outputDir": "C:\\Users\\xxx\\Dropbox\\Documents\\Dev",
+      "size": 300,
+      "port": 7575
+    },
+    {
+      "name": "Dsm-landing",
+      "type": "site",
+      "port": 9696
+    },
+    {
+      "name": "NgWeatherWatcher",
+      "type": "cordova",
+      "outputDir": "C:\\Users\\xxx\\Dropbox\\Documents\\Dev",
+      "size": 300
+    }
+  ]
 }

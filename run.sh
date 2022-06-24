@@ -1,15 +1,26 @@
 #!/bin/bash
 
+function getPort() {
+  apps_url=$(curl -s "https://raw.githubusercontent.com/69pmb/Deploy/main/deploy-properties.json")
+  apps=$(echo $apps_url | jq '.apps[] | .name |= ascii_downcase')
+  app_port=$(echo $apps | jq 'select(.name == '\"$1\"')' | grep port | cut -d: -f 2)
+  if [[ -z $app_port ]]
+  then echo 8080
+  else echo $app_port
+  fi
+}
+
 select image in $(docker images --format '{{.Repository}}:{{.Tag}}' -f dangling=false | sort)
 do
   if [[ ! -z $image ]]
   then
     echo "You have selected '$image'"
-    name=$(echo $image | cut -d : -f 1 | rev | cut -d / -f 1 | rev)
+    name=$(echo $image | cut -d : -f 1 | cut -d / -f 2 | cut -d . -f 1)
 
     let port
-    read -p "Enter the exposed port [8080]: " port
-    port=${port:-8080}
+    conf_port=$(getPort $name)
+    read -p "Enter the exposed port [$conf_port]: " port
+    port=${port:-$conf_port}
 
     let env
     read -p "Enter the env file [Empty for no file]: " env
