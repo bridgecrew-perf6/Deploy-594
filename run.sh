@@ -3,7 +3,7 @@
 function getPort() {
   apps_url=$(curl -s "https://raw.githubusercontent.com/69pmb/Deploy/main/deploy-properties.json")
   apps=$(echo $apps_url | jq '.apps[] | .name |= ascii_downcase')
-  app_port=$(echo $apps | jq 'select(.name == '\"$1\"')' | grep port | cut -d: -f 2)
+  app_port=$(echo $apps | jq 'select(.name == '\"$1\"')' | grep port | cut -d: -f 2 | sed 's/,//g')
   if [[ -z $app_port ]]
   then echo 8080
   else echo $app_port
@@ -47,6 +47,8 @@ do
 	read -p "[y/n] #? " choice
 	if [[ $choice =~ ^(y|Y)([eE][sS])?$ ]]
 	then 
+    docker ps -qaf "publish=$port" | xargs -r docker rm -f
+    docker ps -qaf "name=$name" | xargs -r docker rm -f
     echo $($cmd)
 	elif [ ! -z $choice ]
 	then 
