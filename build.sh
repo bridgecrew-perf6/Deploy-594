@@ -1,6 +1,7 @@
 #!/bin/bash
 
-url="https://raw.githubusercontent.com/69pmb/Deploy/main/docker/ng-build/Dockerfile"
+repo="https://raw.githubusercontent.com/69pmb/Deploy"
+url="$repo/main/docker/ng-build/Dockerfile"
 dockerfile=$(curl -s $url)
 
 # Mapping latest Angular version by Major version
@@ -39,15 +40,16 @@ function selectBranch() {
   echo $br
 }
 
-function getPackage() {
-  pack=$(curl -s "https://raw.githubusercontent.com/$1/$2/$3/package.json")
-  local ngVersion=$(echo $pack | jq '.dependencies["@angular/core"]' | sed 's/"//g' | cut -d. -f1 | sed 's/\^//g')
+function getAngularVersion() {
+  package=$(curl -s "https://raw.githubusercontent.com/$1/$2/$3/package.json")
+  local ngVersion=$(echo $package | jq '.dependencies["@angular/core"]' | sed 's/"//g' | cut -d. -f1 | sed 's/\^//g')
   echo $ngVersion
 }
 
 let branch;
 echo "Which project do you want to build ?"
-select project in Dsm-Landing AllMovies NgMusic Manual
+apps_url=$(curl -s "$repo/main/deploy-properties.json")
+select project in $(echo $apps_url | jq .apps[].name | sed 's/"//g') Manual
 do
   let directory;
   if [[ ! -z $project ]]
@@ -74,11 +76,11 @@ do
       branch=${br:-master}
     fi
 
-    package=$(getPackage $directory $project $branch)
-    echo "Angular version detected: $package"
+    angularVersion=$(getAngularVersion $directory $project $branch)
+    echo "Angular version detected: $angularVersion"
     
-    angular=${NgMap[$package]} 
-    node=${NodeMap[$package]} 
+    angular=${NgMap[$angularVersion]} 
+    node=${NodeMap[$angularVersion]} 
 
     let nginx;
     nginx_version=$(getArgVersion "ng_nginx")
