@@ -95,7 +95,8 @@ do
   fi
 done
 
-cmd="docker build --build-arg GITHUB_DIR=$directory --build-arg GITHUB_PROJECT=$project --build-arg GITHUB_HASH=$branch --build-arg NODE_VERSION=$node --build-arg ANGULAR_VERSION=$angular --build-arg NG_NGINX_VERSION=$nginx --build-arg BUILD_DATE="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" -t ${project,,}-$branch $url"
+clean_branch=$(echo $branch | sed -e "s/\//-/g")
+cmd="docker build --build-arg GITHUB_DIR=$directory --build-arg GITHUB_PROJECT=$project --build-arg GITHUB_HASH=$branch --build-arg NODE_VERSION=$node --build-arg ANGULAR_VERSION=$angular --build-arg NG_NGINX_VERSION=$nginx --build-arg BUILD_DATE="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" -t ${project,,}.$clean_branch $url"
 
 if [[ $cache == 'n' ]]
 then
