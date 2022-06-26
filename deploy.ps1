@@ -6,37 +6,21 @@ For($i=1;$i -le $properties.apps.Length;$i++)
 }
 $app=""
 Do {
-	$app = Read-Host "Which app do you want to deploy ?"
+	$app = Read-Host "Which project do you want to build with Cordova ?"
 } Until ($app -eq 1 -or $app -le $properties.apps.Length)
 
 $app=$properties.apps[$app-1]
-echo "Deploying $app"
+Write-Host "Deploying $app" -ForegroundColor Cyan
 
 $dir = Get-Location
 Set-Variable -Name "workspace" -Value ((Split-Path ($dir | Select-Object -ExpandProperty Path) -Parent) + "\" + $app.name)
-if ($app.type -like "*cordova*" -or $app.type -like "*both*") {
-	if (-not (Test-Path -Path $app.outputDir)) {
-		Write-Host "Output Directory"$app.outputDir"doesn't exist" -ForegroundColor Red
-		exit
-	}
-	Write-Host "Generating apk file" -ForegroundColor Cyan
-	& ".\cordova.ps1" -name $app.name -outputDir $app.outputDir -workspace $workspace -java $properties.java_path -size $app.size
-	& ".\replace.ps1" -file ($workspace + "\dist\index.html") -searched "file:///android_asset/www/" -value '/'
-} elseif ($app.type -like "*site*") {
-	Write-Host "Build angular app" -ForegroundColor Cyan
-	cd $workspace
-	npm run build
-	cd $dir
-	& ".\replace.ps1" -file ($workspace + "\dist\index.html") -searched "{{timestamp}}" -value (Get-Date -UFormat '%d/%m/%Y %Hh%M')
-	Write-Host "Finish building" -ForegroundColor Green
-} else {
-	Write-Host "Unknown type "$app.type -ForegroundColor Red
+if (-not (Test-Path -Path $properties.outputDir)) {
+	Write-Host "Output Directory"$properties.outputDir"doesn't exist" -ForegroundColor Red
+	exit
 }
-
-if ($app.type -like "*site*" -or $app.type -like "*both*") {
-	Write-Host "Deploying app to NAS" -ForegroundColor Cyan
-	& ".\nas.ps1" -name $app.name -port $app.port -workspace $workspace -web_dir $properties.web_dir
-}
+Write-Host "Generating apk file" -ForegroundColor Cyan
+& ".\cordova.ps1" -name $app.name -outputDir $properties.outputDir -workspace $workspace -java $properties.java_path -size $app.size
+& ".\replace.ps1" -file ($workspace + "\dist\index.html") -searched "file:///android_asset/www/" -value '/'
 
 cd $dir
 pause
