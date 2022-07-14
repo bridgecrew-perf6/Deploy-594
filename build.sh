@@ -9,7 +9,8 @@ declare -A NgMap
 NgMap[10]=10.2.4
 NgMap[11]=11.2.19
 NgMap[12]=12.2.17
-NgMap[13]=13.3.5
+NgMap[13]=13.3.8
+NgMap[14]=14.0.6
 
 # Mapping Docker Node alpine image by Angular version
 declare -A NodeMap
@@ -17,6 +18,7 @@ NodeMap[10]=14.18.2-alpine3.12
 NodeMap[11]=14.18.2-alpine3.12
 NodeMap[12]=14.18.2-alpine3.12
 NodeMap[13]=16.12.0-alpine3.12
+NodeMap[14]=16.12.0-alpine3.12
 
 function getArgVersion() {
   local version=$(echo $dockerfile | sed 's/ /\n/g' | grep -i ''"$1"'_version=' | cut -d = -f2)
