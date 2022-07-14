@@ -25,20 +25,9 @@ cd $workspace
 # Build the app
 Write-Host "Build angular app" -ForegroundColor Cyan
 npm run cordova
-
-# Insert timestamp
-cd $dir
-& ".\replace.ps1" -file ($workspace + "\dist\index.html") -searched "{{timestamp}}" -value (Get-Date -UFormat '%d/%m/%Y %Hh%M')
-cd $workspace
-
 Write-Host "Finish building" -ForegroundColor Green
 
 # Build the apk
-$cordovaDir = "cordova\" + $name + "\www"
-rm -r -fo $cordovaDir
-mkdir $cordovaDir
-xcopy /q /s dist $cordovaDir
-Write-Host "Finish copying" -ForegroundColor Green
 cd ("cordova\" + $name)
 Write-Host "Build apk" -ForegroundColor Cyan
 cordova build android
