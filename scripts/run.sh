@@ -49,7 +49,7 @@ do
 	then 
     docker ps -qaf "publish=$port" | xargs -r docker rm -f
     docker ps -qaf "name=$name" | xargs -r docker rm -f
-    echo $($cmd)
+    eval "$cmd"
 	elif [ ! -z $choice ]
 	then 
     echo "Do nothing"

@@ -114,7 +114,7 @@ do
 	read -p "[y/n] #? " choice
 	if [[ $choice =~ ^(y|Y)([eE][sS])?$ ]]
 	then 
-	  echo $($cmd)
+	  eval "$cmd"
 	elif [ ! -z $choice ]
 	then 
 	  echo "Do nothing"
